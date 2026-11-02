@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Touch is typing software from The Computer Services. Learn touch typing in English and Hindi (Inscript) and practise for SSC, RRB, JKSSB, J&amp;K High Court and other typing tests. Free, private, works offline.">
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171614" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://tcs-avi.github.io/touch/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Touch by The Computer Services">
+<meta property="og:title" content="Touch: typing software from The Computer Services">
+<meta property="og:description" content="Touch is typing software from The Computer Services. Learn touch typing in English and Hindi (Inscript) and practise for SSC, RRB, JKSSB, J&amp;K High Court and other typing tests. Free, private, works offline.">
+<meta property="og:url" content="https://tcs-avi.github.io/touch/">
+<meta property="og:image" content="https://tcs-avi.github.io/touch/icon-512.png">
+<meta name="twitter:card" content="summary">
+<title>Touch — typing software from The Computer Services</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#fbfaf7;--fg:#1c1b19;--mut:#6b675f;--card:#fff;--line:#e4e1d8;--ok:#1d4ed8;--bad:#b45309;--badbg:#fde8d2;--cur:#1c1b19;--font:"Atkinson Hyperlegible",system-ui,sans-serif;--ls:0em;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171614;--fg:#efece4;--mut:#8f8b81;--card:#201f1c;--line:#34322d;--ok:#7db3ff;--bad:#ffa85c;--badbg:#4a2f14;--cur:#efece4}}
+:root[data-theme="dark"]{--bg:#171614;--fg:#efece4;--mut:#8f8b81;--card:#201f1c;--line:#34322d;--ok:#7db3ff;--bad:#ffa85c;--badbg:#4a2f14;--cur:#efece4}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);letter-spacing:var(--ls);line-height:1.5}
+main{max-width:780px;margin:0 auto;padding:18px 14px 48px}
+h1{font-size:1.4rem;margin:0}h2{font-size:1.1rem;margin:0 0 4px}.sub,.gate,.hint{color:var(--mut)}.sub{margin:2px 0 14px}
+.stages{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+button,select{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 12px;cursor:pointer}
+.stages button{min-width:40px;padding:6px 8px}
+button[aria-pressed=true]{border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+button:disabled{opacity:.4;cursor:not-allowed}button.pri{background:var(--ok);color:var(--bg);border-color:var(--ok)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.tip{margin:0 0 6px}.gate{font-size:.9rem;margin:0 0 8px}
+#text{position:relative;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.4rem;line-height:2.05;cursor:text;min-height:4em;max-height:10.3em;overflow:hidden}
+.w{display:inline-block;white-space:nowrap}.c{white-space:pre;color:var(--mut)}
+.c.ptl{color:var(--ok);opacity:.55}#text.hi{font-family:"Noto Sans Devanagari","Nirmala UI",Mangal,"Kohinoor Devanagari","Lohit Devanagari",system-ui,sans-serif;font-size:1.5rem;line-height:2.3;max-height:9.4em}
+.c.ok{color:var(--ok)}.c.bad{color:var(--bad);background:var(--badbg);text-decoration:underline wavy}
+.c.cur{box-shadow:inset 2px 0 0 var(--cur);animation:bl 1.1s steps(2) infinite}
+@keyframes bl{50%{box-shadow:none}}@media (prefers-reduced-motion:reduce){.c.cur{animation:none}}
+[data-pal=mono] .c.ok{color:var(--fg)}[data-pal=mono] .c.bad{font-weight:700;color:var(--fg)}
+#ta{position:absolute;opacity:0;width:1px;height:1px;left:-9999px}
+.hint{font-size:.9rem;margin:6px 0 0;min-height:1.4em}
+.kb{display:flex;flex-direction:column;align-items:center;gap:4px;margin:4px 0 12px}.kr{display:flex;gap:4px}
+.k{width:clamp(18px,6.2vw,42px);height:clamp(26px,8vw,40px);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#111;opacity:.5;font-family:ui-monospace,monospace}
+.k{position:relative}.k small{position:absolute;top:1px;right:2px;font-size:.58rem;opacity:.85}
+.k.bump{border-bottom:4px solid #111}.k.nx{opacity:1;outline:3px solid var(--fg);outline-offset:1px}.k.wide{width:clamp(44px,14vw,84px)}.k.sp{width:clamp(130px,42vw,260px);background:#bbb}.k.sh{width:clamp(28px,8.4vw,60px);background:#bbb}
+.leg{display:flex;gap:10px;flex-wrap:wrap;font-size:.85rem;margin:8px 0}.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.big{font-size:3rem;font-weight:700;line-height:1}.res h3{margin:0 0 2px;font-size:.9rem;color:var(--mut);font-weight:400}
+.row{display:flex;gap:22px;flex-wrap:wrap;margin:12px 0}.row b{font-size:1.4rem;display:block}
+.chk{margin:3px 0}.ys{color:var(--ok)}.no{color:var(--bad)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+details{margin-top:14px}summary{cursor:pointer;color:var(--mut)}.set{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;align-items:center}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--fg);max-width:420px;width:calc(100% - 32px);box-sizing:border-box}dialog::backdrop{background:#0008}dialog{max-height:calc(100vh - 32px);overflow:auto}dialog input[type=checkbox]{width:auto;padding:0}dialog select{width:100%;max-width:100%;box-sizing:border-box}
+.lnk{background:none;border:0;padding:0;color:var(--ok);text-decoration:underline;cursor:pointer;font:inherit}.ack{display:flex!important;gap:8px;align-items:flex-start}
+.foot{margin-top:24px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:.85rem}#legal{max-width:640px}#legal .lb{max-height:60vh;overflow:auto;padding-right:6px}#legal h3{margin:14px 0 4px;font-size:1rem}dialog label,#exam label,#dict label{display:block;margin:10px 0}dialog input{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px;box-sizing:border-box;width:100%}
+#pad{width:100%;max-width:700px;height:auto;border:1px dashed var(--line);border-radius:10px;touch-action:none;display:block;margin:10px 0 4px}#dt,#wrta,#bk{width:100%;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px;box-sizing:border-box}.big small{font-size:1rem;font-weight:400}#dshow{font-size:1.2rem;min-height:1.6em}
+.trow{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line)}.trow div{display:flex;flex-direction:column}
+.bars{display:flex;gap:6px;align-items:flex-end;height:84px}.bars div{flex:1;text-align:center;font-size:.75rem;color:var(--mut);display:flex;flex-direction:column;justify-content:flex-end;align-items:center}.bars i{display:block;width:100%;max-width:28px;background:var(--ok);border-radius:4px 4px 0 0;min-height:2px}
+.fg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:.85rem;margin:6px 0}.fg div{padding:2px 8px;border-left:5px solid;line-height:1.35}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}[hidden]{display:none!important}
+li{margin:4px 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Touch</h1>
+<p class="sub">Typing software from <b>The Computer Services</b>. From your first key to expert speed. Accuracy first, then rhythm, then pace.</p>
+<p class="gate"><span id="who"></span> <button id="pe" hidden>Edit</button></p><p class="gate" id="plan"></p>
+<details id="today" open hidden><summary id="tsum">Today’s plan</summary><div id="tp"></div></details>
+<div class="stages" id="tabs" role="group" aria-label="Mode"><button data-m="course" aria-pressed="true">Course</button><button data-m="exam" aria-pressed="false">Exam practice</button><button data-m="hindi" aria-pressed="false">Hindi course</button><button data-m="dict" aria-pressed="false">Dictation (steno)</button></div>
+<div class="stages" id="stages" role="group" aria-label="Stages"></div>
+<div class="stages" id="hstages" role="group" aria-label="Hindi lessons" hidden></div>
+<div class="card" id="exam" hidden><h2>Exam practice</h2><p class="gate" id="exnote"></p>
+<div class="set"><label>Exam pattern <select id="exs"></select></label><label>Length <select id="exm"><option value="2">2 min</option><option value="5">5 min</option><option value="10">10 min</option><option value="15">15 min</option><option value="20">20 min</option><option value="30">30 min</option></select></label><label><input type="checkbox" id="exstrict"> Backspace off</label><label><input type="checkbox" id="exguide"> Keyboard guide</label></div>
+<p class="gate">A timed run on story and report passages, like the real test. You get gross and net WPM, key depressions per hour, and error rate. English and Hindi (Inscript) are supported; Urdu and Kruti Dev are not.</p><button class="pri" id="exgo">Start test</button></div>
+<div class="card" id="dict" hidden><h2>Dictation window (steno practice)</h2><p class="gate" id="dnote"></p>
+<p class="gate">Listen, jot outlines on the pad or on paper, then type what you heard. Outlines are drawn by hand, so this app does not teach Pitman or Gregg; it trains the dictation-and-transcription skill that steno tests measure.</p>
+<div class="set"><label>Speed <select id="ds"><option>60</option><option>65</option><option>70</option><option selected>80</option><option>90</option><option>100</option><option>120</option></select> WPM</label><label>Length <select id="dm"><option value="2">2 min</option><option value="5">5 min</option><option value="10">10 min</option></select></label></div>
+<div class="actions"><button class="pri" id="dgo">Start dictation</button><button id="dstop">Stop</button></div><p class="hint" id="dstat"></p><div id="dshow"></div>
+<canvas id="pad" width="700" height="160" aria-label="Shorthand scratch pad"></canvas><button id="padc">Clear pad</button>
+<label>Your transcription<br><textarea id="dt" rows="8" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea></label>
+<button id="dchk">Check my transcript</button><div id="dres"></div></div>
+<div class="card" id="wr" hidden><h2>Descriptive writing (IBPS PO style)</h2><p class="gate" id="wrp"></p><textarea id="wrta" rows="12" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="Type your essay and summary here"></textarea><p class="hint" id="wrs"></p><button id="wrend">Finish now</button></div>
+<dialog id="onb" aria-labelledby="onbt"><h2 id="onbt">Welcome to Touch</h2><p>Typing software from The Computer Services. Two quick questions so Touch can set your goals.</p>
+<label>Your name or nickname<input id="pn" maxlength="40" autocomplete="name"></label>
+<label>What are you training for?<br><select id="pt"></select></label>
+<label>Target speed (WPM)<input id="pw" type="number" min="5" max="150"></label>
+<p class="gate">A nickname is fine. Your name stays on this device.</p>
+<label class="ack"><input type="checkbox" id="pack"> I have read the disclaimer and privacy notice. I know exam rules change, so I will check the official notification for my exam.</label>
+<p><button type="button" id="olegal">Read the disclaimer and privacy notice</button></p><p class="no" id="perr" hidden>Please tick the box to continue.</p>
+<p class="gate" id="pnote"></p><button class="pri" id="pgo">Start</button></dialog>
+<div class="card" id="lesson" hidden>
+ <h2>Stage 0 · Set up your body and your hands</h2>
+ <ul>
+ <li>Sit upright, feet flat, elbows near 90°, wrists floating above the desk.</li>
+ <li>Put your screen at eye level, an arm’s length away.</li>
+ <li>Rest your left fingers on A S D F and your right on J K L ;. Thumbs hover over the space bar. Feel the bumps on F and J.</li>
+ <li>Every finger owns a column of keys; the colors below show which finger. Return to the home row after each key.</li>
+ <li>Never look at the keys. Look at the text. Slow and accurate now means fast later.</li>
+ </ul>
+ <div class="leg" id="leg"></div>
+ <p class="gate">This build teaches QWERTY. Dvorak and Colemak are not included yet.</p>
+ <button class="pri" id="ready">I’m ready — start Stage 1</button>
+</div>
+<div class="card" id="play">
+ <h2 id="sname"></h2><p class="tip" id="tip"></p><p class="gate" id="gate"></p>
+ <div id="text" aria-hidden="true"></div>
+ <textarea id="ta" aria-label="Typing input. Type the text shown on the page."></textarea>
+ <p class="sr" id="sr"></p>
+ <p class="hint" id="hint"></p>
+ <p class="hint">Click the text to focus. Backspace fixes mistakes. Esc restarts. Switching tabs pauses the clock.</p>
+</div>
+<div id="kbw"><div class="kb" id="kb" aria-hidden="true"></div></div>
+<div class="card res" id="res" hidden aria-live="polite"></div>
+<details><summary>About, sources &amp; tips</summary>
+<p><b>About Touch.</b> Touch is typing software from The Computer Services, made to help you learn touch typing and prepare for typing tests in English and Hindi.</p>
+<p><b>Your data stays on your device.</b> Results, progress and settings are saved in this browser only, and nothing is sent anywhere. The page loads one font from Google Fonts; offline it falls back to your system font. Use Export backup before you clear your browser data.</p>
+<p><b>Exam figures.</b> Checked in November 2026 against official notices where I could find them (SSC, RRB, JKSSB, J&amp;K High Court, University of Jammu), and marked &ldquo;reported&rdquo; or &ldquo;not confirmed&rdquo; where I could not. Error limits are practice guides. Rules change with each notification, so the official notice for your post always wins.</p>
+<p><b>Tips.</b> Turn off autocorrect and predictive text on phones, or runs are flagged as assisted. Hindi typing uses the Inscript layout on a physical keyboard. Press Esc to restart a run. Switching tabs pauses the clock. After your first visit the app also works offline on this device. Accuracy first; speed follows.</p></details>
+<details id="pg"><summary>My progress &amp; backup</summary><div id="prog"></div>
+<p class="gate">Your progress is saved only in this browser. Export a backup now and then, in case you clear your browser data or switch devices.</p>
+<textarea id="bk" rows="3" spellcheck="false" aria-label="Backup text"></textarea>
+<div class="actions"><button id="exp">Export backup</button><button id="imp">Import backup</button></div><p class="hint" id="pmsg"></p></details>
+<details><summary>Accessibility &amp; display</summary>
+<div class="set">
+<label>Font <select id="font"><option value="atk">Atkinson Hyperlegible</option><option value="sys">System sans</option><option value="mono">Monospace</option></select></label>
+<label>Letter spacing <input type="range" id="ls" min="0" max="0.2" step="0.02" value="0"></label>
+<label>Colors <select id="pal"><option value="bo">Blue / orange</option><option value="mono">Mono + underline</option></select></label>
+<label><input type="checkbox" id="guide"> Keyboard guide</label><label><input type="checkbox" id="hime"> Built-in Inscript for Hindi (any keyboard)</label>
+</div></details>
+<footer class="foot"><p>Touch is typing software from The Computer Services, made to help you practise. It is a practice tool, not an official test, and is not affiliated with or endorsed by any exam body. Exam rules change, so always check the official notification. Your data stays in this browser. <button class="lnk" id="flegal">Disclaimer &amp; privacy</button></p></footer>
+</main>
+<dialog id="legal" aria-labelledby="lgt"><h2 id="lgt">Disclaimer &amp; privacy</h2><div class="lb">
+<h3>What this is</h3><p>Touch is typing software from The Computer Services, made to help you learn and practise typing. It is a practice tool, not an official test. It is not affiliated with, endorsed by, or connected to the Staff Selection Commission, the Railway Recruitment Boards, IBPS, JKSSB, JKPSC, the High Court of Jammu &amp; Kashmir and Ladakh, the Shri Mata Vaishno Devi Shrine Board, any university or school board, or any other recruiting body. Their names are used only to describe publicly announced requirements. All names and trademarks belong to their owners.</p>
+<h3>Exam information may be wrong or out of date</h3><p>Speeds, durations, error limits, layouts and marking rules were checked in November 2026 against official notices where I could find them, and against secondary sources where I could not; those are marked &ldquo;reported&rdquo; or &ldquo;not confirmed&rdquo;. Rules change with every notification and differ by post, shift and year. Always read the official notification for your exam. The pass marks, error limits and scores shown here are practice guides. They are not official marking and do not predict your result.</p>
+<h3>No guarantee</h3><p>Using Touch does not guarantee selection, a particular speed, or a pass. The passages are original sample text, not past papers. The Hindi text and the Inscript key map have not been checked by a language authority or a standards body. If a key differs from your own computer&rsquo;s Hindi keyboard, trust your computer&rsquo;s layout and check the official test software. Kruti Dev and Remington layouts are not included.</p>
+<h3>Use at your own risk</h3><p>Touch is provided &ldquo;as is&rdquo;, without warranties of any kind. To the extent the law allows, The Computer Services is not responsible for losses that result from using it or relying on it, including lost progress. Take regular breaks, keep a relaxed posture, and stop if you feel pain.</p>
+<h3>Privacy: what is stored</h3><p>Everything is stored only in this browser, on your device: your name or nickname, your goal and target speed, your lesson progress, your settings, per-key speed and error statistics, and a practice log (date, minutes, speed, accuracy). The raw keystrokes of a run are kept in memory only while you practise and are not saved. There are no accounts, no cookies, no analytics and no advertising.</p>
+<h3>Privacy: what leaves your device</h3><p>Your practice data is never sent to The Computer Services or to anyone else. The page asks Google Fonts for one font (Atkinson Hyperlegible), so Google can see that request, as it would for any website that uses its fonts. Offline, the page uses your system font. Touch is hosted on GitHub Pages (tcs-avi.github.io). GitHub can see that you visited, as any web host can, and handles that under its own privacy statement. After your first visit your browser may also keep a copy of the app on your device so it works offline; clearing your browser&rsquo;s site data removes it. The dictation tab uses your browser&rsquo;s built-in speech voices. In some browsers those voices run online, and the text spoken is built-in sample text, never your own typing.</p>
+<h3>Your control</h3><p>Export backup (in My progress &amp; backup) creates a text copy of your data, including your name, so keep it private. Clearing your browser&rsquo;s site data erases everything, and so does the button below. On a shared computer, use a nickname or delete your data when you finish.</p>
+<p><button id="wipe">Delete all my data on this device</button> <span class="gate" id="wipemsg"></span></p>
+<h3>Children</h3><p>Touch collects nothing, but if you are young, ask a parent or guardian before entering your real name. A nickname works just as well.</p>
+<p class="gate">This notice is general information, not legal advice.</p></div>
+<div class="actions"><button class="pri" id="lclose">Close</button></div></dialog>
+<noscript><p style="padding:16px">Touch needs JavaScript. Please enable it and reload.</p></noscript>
+<script>
+"use strict";
+if(!(window.Intl&&Intl.Segmenter)){document.body.innerHTML="<main style=\"max-width:520px;margin:40px auto;padding:16px;font-family:system-ui,sans-serif\"><h1>Touch</h1><p>This browser is too old to run Touch. Please use a recent Chrome, Edge, Safari (14.1 or newer) or Firefox (125 or newer).</p></main>";throw new Error("Intl.Segmenter is not available")}
+/* ================= pure core: data, generators, metrics, adaptive engine ================= */
+const L="abcdefghijklmnopqrstuvwxyz",U=L.toUpperCase(),P=".,;:'\"?!-()",N="0123456789@#$%&*+=/_[]<>";
+const ALL=[...new Set(("ask add all dad sad fad lad gas has had hall fall glad flag lag sag jag dash gash hash lash sash fads lads dads halls falls flask salad shall slash flash alfalfa gaffs shad hags jags "+
+"the that this with were your just should would there they their each other after first right light flight eight quiet today wheat sweet floor report shop paper power upper pause house hours keys joy tree three queue quote write wrote tired ready study pilot pirate jelly yellow spell rope rule pulse polite sheep sleep slept sport whose whole while hold held life like lake kite tail sail soil oil file fill full pull push dish fish wish does goes gets lets "+
+"and for are but not you can her was one our out day get him his how man new now old see two way who boy did its let put say she too use "+
+"about above across again always among animal answer around became because before began behind below between bring build carry change children close country different during earth every example family father follow friend garden great group happen history important kitchen letter little mountain mother never number office people picture place plant question river school second simple small something sometimes started station story street system table thought through together under until water weather where which window without woman world young").split(" "))];
+const NAMES="Anna Ben Carla Diego Emma Frank Grace Henry Isla Jack Kara Liam Maya Noah Olive Paul Rosa Sam Tina Uma".split(" ");
+const S5=["It's late, but we're almost done.","Wait, what time does the train leave?",`She said, "Be there at noon."`,"No! Don't touch that; it's hot.","We need three things: bread, milk, and eggs.","Well-known facts aren't always true.","Is this your coat? It looks like mine.","He paused (just briefly) before he answered.","Hurry up, we're late!","First, stir the soup; then, taste it.","Their house, which is old, still stands.","Don't forget: the keys are on the table."];
+const S8=["The quick lessons stay with you when you practice a little every day.","A calm rhythm beats a fast start that ends in mistakes.","Good typists look at the screen, never at their hands.","Some mornings the words come easily; other mornings you have to earn them.","When the road is long, take small steps and keep your breathing steady.","She found the old map in a drawer, folded neatly beneath a pile of letters.","Patience is a skill, and like any skill, it grows with use.","We walked along the river until the evening light turned the water gold.","The library was quiet except for the soft tapping of keys.","If you make a mistake, fix it calmly and keep moving.","Every expert was once a beginner who refused to quit.","Small improvements, repeated daily, add up to remarkable results.","The market opens early, and the best bread is gone by nine.","He packed a lunch, a notebook, and a very old umbrella.","Smooth is steady, and steady becomes fast.","Clear instructions make hard tasks feel simple."];
+const r=n=>Math.random()*n|0,d=n=>String(r(10**n)).padStart(n,"0"),z=n=>String(n).padStart(2,"0");
+const TP=[()=>`${2020+r(8)}-${z(1+r(12))}-${z(1+r(28))}`,()=>`$${1+r(90)}.${d(2)}`,()=>`555-${d(4)}`,()=>`${["sam","kim","lee","ana"][r(4)]}${10+r(90)}@mail.com`,()=>`${1+r(99)}%`,()=>`(${1+r(9)} + ${1+r(9)}) * ${1+r(9)} = ${d(2)};`,()=>`item_${r(9)} = [${r(9)}, ${r(9)}];`,()=>`#${d(3)} & #${d(3)}`,()=>`${1+r(9)}/${1+r(9)} < ${10+r(80)}`];
+const recent=[];
+function pick(pool,n){let p=pool.filter(w=>!recent.includes(w));if(p.length<n)p=pool.slice();
+  for(let i=p.length-1;i>0;i--){const j=r(i+1);[p[i],p[j]]=[p[j],p[i]]}
+  const o=p.slice(0,n);recent.push(...o);recent.splice(0,Math.max(0,recent.length-500));return o}
+const pool=cs=>ALL.filter(w=>[...w].every(c=>cs.includes(c)));
+const cap=w=>w[0].toUpperCase()+w.slice(1),shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+const tpls=n=>Array.from({length:n},()=>TP[r(TP.length)]());
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* adaptive engine: error rate (Bayesian shrinkage) + latency RATIO, recency decay (14d), confidence, MMR selection */
+function weakness(st){const now=Date.now(),K={},B={};let tn=0,te=0;
+  for(const c in st.k){tn+=st.k[c].n;te+=st.k[c].e}const g=tn?Math.max(te/tn,.02):.05;
+  const dec=t=>Math.pow(.5,(now-(t||now))/864e5/14),conf=n=>1-Math.exp(-n/20);
+  for(const c in st.k){const o=st.k[c],er=(o.e+10*g)/(o.n+10),lat=o.rc?Math.min(1,Math.max(0,o.rs/o.rc-1)):0;
+    K[c]=(.55*Math.min(1,er/.2)+.45*lat)*dec(o.t)*conf(o.n)}
+  for(const q in st.b){const o=st.b[q];B[q]=Math.min(1,Math.max(0,o.rs/o.n-1))*dec(o.t)*conf(o.n)}
+  return{K,B}}
+const bi=w=>{const a=[];for(let i=0;i<w.length-1;i++)a.push(w.slice(i,i+2));return a};
+function smart(p,n,st){const{K,B}=weakness(st);if(Object.keys(K).length<8)return pick(p,n); // cold start: broad sample
+  const sc=w=>([...w].reduce((s,c)=>s+(K[c]||0),0)+bi(w).reduce((s,q)=>s+(B[q]||0),0))/Math.sqrt(w.length);
+  const cand=p.map(w=>[w,sc(w)]).sort((a,b)=>b[1]-a[1]),tN=Math.round(n*.6),rN=Math.round(n*.25),out=[],seen=new Set();
+  while(out.length<tN&&out.length<cand.length){let best,bs=-1;
+    for(const[w,s]of cand){if(out.includes(w))continue;const b=bi(w),ov=b.length?b.filter(q=>seen.has(q)).length/b.length:0,m=s*(1-.7*ov)+Math.random()*.01;if(m>bs){bs=m;best=w}}
+    out.push(best);bi(best).forEach(q=>seen.add(q))}
+  shuf(cand.slice(tN,tN*3).map(x=>x[0]).filter(w=>!out.includes(w))).slice(0,rN).forEach(w=>out.push(w)); // review tier
+  shuf(p.filter(w=>!out.includes(w))).slice(0,n-out.length).forEach(w=>out.push(w)); // fresh/exploration
+  return shuf(out)}
+const getSt=(k="tt2:st")=>store.get(k,{k:{},b:{}});
+function learn(S,key="tt2:st"){const st=getSt(key),now=Date.now();
+  for(const s of S){if(!s.ex||s.ex===" ")continue;const o=st.k[s.ex]||(st.k[s.ex]={n:0,e:0,rs:0,rc:0});o.n++;o.t=now;if(!s.ok)o.e++;
+    if(s.ok&&s.ratio){o.rs+=s.ratio;o.rc++}
+    if(s.p&&s.p!==" "&&s.ok&&s.pok&&s.ratio){const q=s.p+s.ex,b=st.b[q]||(st.b[q]={n:0,rs:0});b.n++;b.rs+=s.ratio;b.t=now}}
+  const ks=Object.keys(st.b);if(ks.length>400)ks.sort((x,y)=>st.b[x].t-st.b[y].t).slice(0,ks.length-400).forEach(k=>delete st.b[k]);
+  store.set(key,st);return st}
+
+/* curriculum: each stage generates its own text and declares its charset (validated below) */
+const W3=()=>pool(L),sent=(a,n)=>pick(a,n).join(" ");
+const ST=[
+{id:0,name:"Set up"},
+{id:1,name:"Home row",ch:"asdfghjkl;",a:.98,w:15,tip:"New keys: A S D F G H J K L ;. Fingers rest on the home row and return after every key.",
+  gen:()=>{const runs=pick(["fj","dk","sl","a;","fk","dj","sk","fl","gh","hg"],6).map(x=>x+x).join(" ");return runs+" "+pick(pool("asdfghjkl"),14).join(" ")}},
+{id:2,name:"Home + top row",ch:"asdfghjklqwertyuiop",a:.97,w:25,tip:"New keys: Q W E R T Y U I O P. Reach up and come straight back.",gen:()=>pick(pool("asdfghjklqwertyuiop"),22).join(" ")},
+{id:3,name:"Full alphabet",ch:L,a:.97,w:35,tip:"New keys: Z X C V B N M. Your pinkies and ring fingers need the most care here.",gen:()=>pick(W3(),25).join(" ")},
+{id:4,name:"Shift & capitals",ch:L+U,a:.96,w:40,tip:"Shift with the pinky on the OPPOSITE hand from the letter. The guide shows which one.",
+  gen:()=>shuf([...pick(W3(),16).map((w,i)=>i%2?cap(w):w),...pick(NAMES,6)]).join(" ")},
+{id:5,name:"Punctuation",ch:L+U+P,a:.96,w:45,tip:"Punctuation is a motor skill: right pinky for ; ' - and right ring finger for . and (. Practice slowly.",gen:()=>sent(S5,5)},
+{id:6,name:"Numbers & symbols",ch:L+U+P+N+"$",a:.95,w:35,tip:"Reach for numbers without lifting your palm. Symbols are real-world patterns: dates, prices, emails, code.",gen:()=>tpls(9).join(" ")},
+{id:7,name:"Your weak spots",ch:L,a:.95,w:55,tip:"Words chosen from YOUR slowest keys and letter pairs. Try hiding the keyboard guide in settings.",gen:()=>smart(W3(),24,getSt()).join(" ")},
+{id:8,name:"Sentences",ch:L+U+P,a:.95,w:65,tip:"Read one phrase ahead of the cursor. Real sentences are where speed becomes natural.",gen:()=>sent(S8,5)},
+{id:9,name:"Endurance",ch:L+U+P,a:.94,w:70,timed:18e4,tip:"A timed 3-minute run. The text keeps coming. Hold the same rhythm to the end.",gen:()=>sent([...S5,...S8],8)},
+{id:10,name:"Expert mix",ch:L+U+P+N+"$",a:.95,w:0,c:.9,tip:"Sentences, numbers and symbols mixed. The goal is steadiness: 90% consistency.",gen:()=>shuf([...pick(S8,4),...tpls(3)]).join(" ")}
+];
+const DRILL={id:"S",name:"Weak-spot drill",ch:L,a:0,w:0,tip:"A drill built from your slowest keys and pairs, plus review and fresh words.",gen:()=>smart(W3(),24,getSt()).join(" ")};
+(function validate(){for(const s of ST){if(!s.gen)continue;if(pool(s.ch).length<12&&s.id<4)console.warn("starved",s.id);
+  for(let i=0;i<20;i++){const t=s.gen();if(t!==t.normalize("NFC")||[...t].some(c=>c!==" "&&!s.ch.includes(c)))console.warn("charset violation",s.id,t)}}})();
+
+/* metrics: pure function of (log, target); winsorized consistency so one pause can't wreck it */
+const seg=new Intl.Segmenter(undefined,{granularity:"grapheme"}),G=s=>Array.from(s);
+const median=a=>{if(!a.length)return 0;const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2};
+function compute(log,tg){
+  const typed=[],S=[];let asg=false,tot=0,okc=0,pt,pf=0,first,last,rm=0,lr;
+  for(const q of log){
+    if(q.op==="pause"||q.op==="resume")continue;
+    if(q.f&1)asg=true;if(first===undefined)first=q.t;last=q.t;
+    if((q.f&8)&&lr!==undefined)rm+=q.t-lr;lr=q.t;
+    const iv=pt!==undefined&&!(q.f&11)&&!(pf&2)?Math.min(q.t-pt,1200):undefined;
+    if(q.op==="del"){for(let i=0;i<q.n;i++)typed.pop()}
+    else{if(q.op==="rep")G(q.removed).forEach(()=>typed.pop());
+      for(const ch of G(q.text)){const idx=typed.length,ex=tg[idx],pS=S[S.length-1];tot++;if(ex===ch)okc++;
+        S.push({ex,ch,ok:ex===ch,iv,i:idx,p:iv!==undefined&&pS&&pS.i===idx-1?pS.ex:undefined,pok:!!(pS&&pS.ok)});typed.push(ch)}}
+    pt=q.t;pf=q.f;
+  }
+  const fin=typed.filter((c,i)=>c===tg[i]).length,dur=first===undefined?0:Math.max(0,last-first-rm),min=dur/60000;
+  const ivs=S.filter(s=>s.iv!==undefined).map(s=>s.iv),med=median(ivs),cp=Math.min(1200,Math.max(3*med,1)),w=ivs.map(x=>Math.min(x,cp));let cons=0;
+  if(w.length>=8){const m=w.reduce((a,b)=>a+b)/w.length,sd=Math.sqrt(w.reduce((a,b)=>a+(b-m)**2,0)/w.length);cons=Math.max(0,Math.min(1,1-sd/m))}
+  const hist=[];for(const s of S){if(s.iv===undefined)continue;const ref=hist.length>=8?median(hist.slice(-30)):med;s.ratio=ref>0?s.iv/ref:undefined;hist.push(s.iv)}
+  return{asg,dur,cons,acc:typed.length?fin/typed.length:1,rawAcc:tot?okc/tot:1,wpm:min>0?fin/5/min:0,S};
+}
+const PASS=[`Rafiq woke before sunrise and walked down to the lake, where the water lay perfectly still. A boatman was already mending his nets, and the smell of fresh bread drifted from the village behind him. 'You're early,' the boatman said, without looking up. 'So are you,' Rafiq replied. They shared a quiet laugh. For a while neither of them spoke; the mist lifted slowly from the hills, and the first light turned the lake from grey to gold. It was, Rafiq thought, the kind of morning that makes a hard year feel worth it.`,
+`Dear Sir, I am writing to request a copy of the notice published on the 14th of March regarding the revised timetable for the annual examinations. As the original notice was not available at our office, several candidates have been unable to confirm their schedules. I would be grateful if you could send the document at your earliest convenience, either by post or by email. Please let me know if any fee is required for this service. Thank you for your time and assistance. Yours faithfully, Anil Kumar.`,
+`The district library opened its new reading hall on Monday, giving students a quiet place to study until late in the evening. The hall has seating for 120 readers, free internet access, and a section reserved for competitive exam books. Officials said the project took eleven months to finish and cost less than planned. Library staff expect around 300 visitors every day, and volunteers will help first-time users find the books they need. The hall will stay open from 8 am to 8 pm on all days except public holidays.`,
+`Meera's grandfather kept an old clock in the hall, and every evening he wound it with the same slow care. As a child she thought the clock was alive. One winter it stopped, and the house felt strangely empty. Her grandfather opened the case, studied the tiny wheels, and smiled. 'Nothing is broken,' he said. 'It only needed someone to pay attention.' Years later, when Meera began her first job, she remembered those words and decided that attention, more than talent, would be the thing she trusted.`,
+`Typing well is not a gift; it is a habit built from small, honest efforts. Practise for 30 minutes every day instead of three hours once a week. Keep your wrists relaxed, your back straight, and your eyes on the screen. When you make a mistake, do not stop to be angry; fix it calmly and move on. Speed will arrive on its own once your hands trust the keyboard. In a real test, steady accuracy beats a fast start that ends in careless errors.`,
+`The annual report shows that 1,250 applications were received during 2025, of which 1,084 were processed within the prescribed time. The remaining 166 cases required additional documents from the applicants. The average processing time fell from 12 days to 9 days, mainly because of the new online tracking system. The committee recommends that all offices adopt the same system by 31 March, and that staff receive training in data entry, filing, and basic correspondence.`];
+const PRESETS={
+learn:{g:"Start here",n:"Learn to type from scratch",w:25,note:"No exam yet. Start with Stage 1 and work upward; accuracy first."},
+chsl:{g:"Central government: SSC",n:"SSC CHSL: LDC / JSA / PA / SA",w:35,min:10,err:.05,note:"SSC sets 35 WPM in English (30 in Hindi) over 10 minutes, about 10,500 key depressions an hour. The 5% error limit is a practice guide; confirm it in the notice."},
+deo:{g:"Central government: SSC",n:"SSC CHSL: Data Entry Operator",w:27,kd:8000,min:15,err:.05,note:"8,000 key depressions an hour over 15 minutes (about 2,000 keystrokes). Some posts ask for more."},
+cgl:{g:"Central government: SSC",n:"SSC CGL: Tax Assistant (DEST) / Assistant (CPT)",w:27,kd:8000,min:15,err:.05,note:"SSC's instructions: a 15-minute test on a passage of about 2,000 key depressions (8,000 an hour). The Assistant (CSS) skill test also has spreadsheet and slide-show modules, which this app does not practise."},
+steno:{g:"Central government: SSC",n:"SSC Stenographer Grade C / D",w:30,min:10,err:.1,sh:[80,100],note:"Dictation for 10 minutes at 80 WPM (Grade D) or 100 WPM (Grade C), then transcription on a computer. The typing target here is a practice figure. Use the Dictation tab."},
+rrb:{g:"Railways",n:"RRB NTPC: Clerk / Typist / Time Keeper posts",w:30,min:10,err:.05,strict:true,note:"Official RRB notices set 30 WPM in English (25 in Hindi) over 10 minutes, about 300 words, and say editing tools cannot be used to correct mistakes. So Backspace is off by default here. The 5% error limit is a practice guide."},
+ibpspo:{g:"Banking",n:"IBPS PO: mains descriptive (typed)",w:25,min:30,desc:true,note:"No WPM cut-off. The mains descriptive paper (25 marks, 30 minutes, English) is typed on the keyboard. Practise writing about 330 words in 30 minutes, thinking time included."},
+bankclerk:{g:"Banking",n:"IBPS / SBI Clerk, RRB Office Assistant",w:25,none:true,note:"These exams have no typing-speed test. Selection is by online exams, plus a local-language proficiency check for some candidates. Typing speed still helps with the online format."},
+jkssb:{g:"Jammu & Kashmir",n:"JKSSB: Junior Assistant",w:35,min:10,err:.1,note:"JKSSB type-test notices require at least 35 WPM with 90% accuracy. The type test carries 20 of 100 selection points; the written exam carries 80."},
+jkssbsteno:{g:"Jammu & Kashmir",n:"JKSSB: Junior (Scale) Stenographer",w:35,min:10,err:.1,sh:[65,60],note:"Recent JKSSB notices ask for 65 WPM shorthand and 35 WPM typing. Some steno posts have been listed at 60 shorthand and 45 typing. Read your own notification."},
+jkhcja:{g:"Jammu & Kashmir",n:"J&K High Court: Junior Assistant",w:30,min:10,err:.1,note:"High Court advertisements ask for typing at 30 WPM on a computer keyboard. Check the current advertisement for the exact test."},
+jkhcsteno:{g:"Jammu & Kashmir",n:"J&K High Court: Stenographer / Steno-Typist",w:40,min:10,err:.1,sh:[60,70,80],note:"High Court notices list Senior Scale Stenographer at 80 WPM shorthand and 40 typing, Junior Scale at 70 and 35, Steno-Typist at 60 and 30."},
+jku:{g:"Jammu & Kashmir",n:"J&K universities and JKBOSE",w:40,min:10,err:.1,note:"University of Jammu notices ask for 40 WPM computer typing for Junior Assistant. IUST has used 35 WPM over a 10-minute test and JKBOSE 30 WPM (2019). Confirm in your advertisement."},
+jkpsc:{g:"Jammu & Kashmir",n:"JKPSC",w:35,min:10,err:.1,note:"I found no typing standard in JKPSC notices; it mostly runs gazetted-service exams. If your post lists one, set it as your target. 35 WPM matches JKSSB."},
+shrine:{g:"Jammu & Kashmir",n:"Shrine Board (SMVDSB) posts",w:35,min:10,err:.1,note:"Junior Assistant posts have been reported at 35 WPM, but I could not confirm it in an official notice. Check the board's advertisement."},
+chslhi:{g:"Hindi typing (Inscript)",n:"SSC CHSL: Hindi typing",w:30,min:10,err:.05,lang:"hi",note:"SSC sets 30 WPM in Hindi for these posts over 10 minutes. This app uses the Inscript layout; some tests use Kruti Dev or another layout, so check which one yours uses. Each typed character counts as one key depression here, five to a word."},
+rrbhi:{g:"Hindi typing (Inscript)",n:"RRB NTPC: Hindi typing",w:25,min:10,err:.05,strict:true,lang:"hi",note:"Official RRB notices set 25 WPM in Hindi over 10 minutes and bar editing tools, so Backspace is off by default. Check which keyboard layout your test uses."},
+hindi:{g:"Hindi typing (Inscript)",n:"Hindi typing practice (any exam)",w:25,min:10,err:.1,lang:"hi",note:"General Hindi practice on the Inscript layout. Keep the keyboard guide on until the layout feels natural."},
+other:{g:"Other",n:"Another typing test",w:30,min:10,err:.1,note:"Set your own target speed. Many clerical posts ask for 30 to 40 WPM."}};
+/* ---- Hindi: Devanagari InScript (unshifted, shifted) by physical key; "" = not mapped ---- */
+const INS={q:["ौ","औ"],w:["ै","ऐ"],e:["ा","आ"],r:["ी","ई"],t:["ू","ऊ"],y:["ब","भ"],u:["ह","ङ"],i:["ग","घ"],o:["द","ध"],p:["ज","झ"],"[":["ड","ढ"],"]":["़","ञ"],
+a:["ो","ओ"],s:["े","ए"],d:["्","अ"],f:["ि","इ"],g:["ु","उ"],h:["प","फ"],j:["र",""],k:["क","ख"],l:["त","थ"],";":["च","छ"],"'":["ट","ठ"],
+z:["ॆ","ऎ"],x:["ं","ँ"],c:["म","ण"],v:["न",""],b:["व",""],n:["ल","ळ"],m:["स","श"],",":[",","ष"],".":[".","।"],"/":["य",""],
+"1":["१","ऍ"],"2":["२","ॅ"],"3":["३",""],"4":["४",""],"5":["५",""],"6":["६",""],"7":["७",""],"8":["८",""],"9":["९","("],"0":["०",")"],"-":["-","ः"],"=":["ृ","ऋ"],"`":["",""],"\\":["",""]};
+const INV={};for(const b in INS)INS[b].forEach((c,i)=>{if(c&&!INV[c])INV[c]={b,s:i===1}});
+const CODE2={Space:" ",Minus:"-",Equal:"=",BracketLeft:"[",BracketRight:"]",Semicolon:";",Quote:"'",Comma:",",Period:".",Slash:"/",Backquote:"`",Backslash:"\\"};
+for(const c of "abcdefghijklmnopqrstuvwxyz")CODE2["Key"+c.toUpperCase()]=c;for(const d of "1234567890")CODE2["Digit"+d]=d;
+const PASSH=["सुबह की ठंडी हवा चल रही थी। रमेश अपने छोटे से गाँव के पुराने कुएँ के पास पहुँचा। वहाँ उसकी दादी पानी भर रही थीं। उसने मुस्कुराकर कहा, दादी, आज मैं अच्छा काम करूँगा। दादी ने प्यार से उसके सिर पर हाथ रखा और आशीर्वाद दिया।",
+"माननीय महोदय, सविनय निवेदन है कि मैं आपके कार्यालय में लिपिक पद के लिए आवेदन करना चाहता हूँ। मेरे सभी प्रमाणपत्र इस पत्र के साथ संलग्न हैं। कृपया मेरे आवेदन पर विचार करने का कष्ट करें। धन्यवाद।",
+"आज शहर के नए पुस्तकालय का उद्घाटन हुआ। यहाँ विद्यार्थियों के लिए अध्ययन की अच्छी व्यवस्था की गई है। पुस्तकालय प्रतिदिन सुबह आठ बजे से शाम आठ बजे तक खुला रहेगा। सभी लोग यहाँ आकर किताबें ले सकते हैं।",
+"लगातार अभ्यास से हर काम आसान हो जाता है। टाइपिंग सीखने के लिए धैर्य और नियमित अभ्यास बहुत जरूरी है। सही बैठें, उँगलियाँ सीधी रखें और स्क्रीन पर ध्यान रखें।"];
+PASSH.forEach(t=>{if(t!==t.normalize("NFC")||[...t].some(c=>c!==" "&&!INV[c]))console.warn("hindi passage not typeable on Inscript",[...t].find(c=>c!==" "&&!INV[c]))});
+/* ---- Hindi course: seven lessons, each adds keys; text = syllables + conjuncts + words from a vocabulary filtered by the keys learned so far ---- */
+const CONS="कखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसहळ",MAT="ािीुूृेैोौ",IVOW="अआइईउऊऋएऐओऔ";
+const HW=[...new Set(("कर पर तक चर तप पति चुप परे करो तरु बाग दादी राज गाजर कबीर दीपक पूजा बाजार तीर ताज पुजारी गुरु जगत हर दर बहू राजा दौड गौरव हार जीत बीज दूर जोर तैर बैर गीत डर डाक डोर दाग हैं है हो ही जो गया "+
+"मन नाम वन लाल सब साल यह याद पानी नमक नदी मौसम समय सपना सुबह संसार हँसना माँ मैं मेरा नया वह वही सही सभी हम हमें तुम उसका इसलिए आदमी अच्छा ठंडा खाना खुशी खेल किताब कुछ भारत फूल बच्चा रास्ता "+
+"विद्यालय शब्द स्कूल प्यार प्रेम मित्र पत्र पुस्तक कार्य सम्मान स्वागत भाषा शिक्षा परीक्षा अध्यक्ष समाचार सरकार कार्यालय लिपिक आवेदन प्रमाण अभ्यास धैर्य नियम समस्या समाधान विश्वास जीवन परिवार संस्कृति "+
+"ऋण ऋषि ऊपर ऊँचा एक ऐसा ओर आम आप इधर उधर अब अपना अगर असर छात्र ज्ञान क्षमा श्रम त्योहार दुःख पुनः अंक कल आज कब जब तब अभी कहाँ यहाँ वहाँ कैसे क्यों कौन कितना बहुत लोग घर बाहर अंदर शहर गाँव देश दुनिया रंग रात दिन शाम धूप बारिश हवा आसमान धरती "+
+"पर्वत समुद्र जंगल फल सब्जी दूध रोटी चावल दाल चीनी चाय सुनो देखो बोलो लिखो समझो चलो रुको सोचो खोलो बंद खुला सच झूठ ज्यादा सीखना सिखाना टाइपिंग कीबोर्ड कंप्यूटर गति सटीक शुद्ध ध्यान").split(" "))];
+const CONJ=["क्र","प्र","त्र","क्त","त्त","च्च","क्क","प्प","द्र","ग्र","ब्द","द्ध","द्द","ज्ज","स्त","स्प","स्न","न्त","न्द","म्ब","म्प","ल्प","श्व","ष्ट","क्ष","ज्ञ","श्र","स्म","न्य","त्य","द्य","व्य","र्य"];
+const HL=[
+{id:"h1",n:"Hindi 1 · Home row",add:"ोे्िुपरकतचट",a:.96,w:8,tip:"Inscript uses the same finger zones as English. Keys: A S D F G H J K L ; and the apostrophe key (ट). The bumps are on ि (F) and र (J). Syllables first, then a few real words."},
+{id:"h2",n:"Hindi 2 · Top row",add:"ौैाीूबहगदजड",a:.96,w:10,tip:"New keys: Q W E R T Y U I O P [. Reach up and return to the home row."},
+{id:"h3",n:"Hindi 3 · Bottom row",add:"मनवलसय,.।ंँ",a:.95,w:12,tip:"New keys: X C V B N M , . /. ं is X, ँ is Shift+X, and the full stop । is Shift+period."},
+{id:"h4",n:"Hindi 4 · Shift layer",add:"औऐआईऊभङघधझढओएअइउफखथछठ",a:.95,w:12,tip:"Hold the opposite-hand Shift for aspirated consonants and independent vowels. The small letter in a corner of each key shows its Shift character."},
+{id:"h5",n:"Hindi 5 · Remaining keys",add:"णशषञऋृःळ१२३४५६७८९०",a:.95,w:14,tip:"Last keys: ण (Shift+C), श (Shift+M), ष (Shift+,), ञ (Shift+]), ऋ (Shift+=), ृ (=), ः (Shift+-), ळ (Shift+N), and the number row."},
+{id:"h6",n:"Hindi 6 · Conjuncts",add:"",mode:"conj",a:.95,w:15,tip:"Conjuncts: type consonant, then the virama key D, then the next consonant. क्ष is three keys: क, D, ष."},
+{id:"h7",n:"Hindi 7 · Real sentences",add:"",mode:"sent",a:.95,w:18,tip:"Real Hindi text. Hide the keyboard guide in settings to test yourself without it."}];
+const hcum=i=>HL.slice(0,i+1).map(x=>x.add).join("");
+const hpool=ch=>HW.filter(w=>[...w].every(c=>ch.includes(c)));
+function hgen(i){const l=HL[i],ch=hcum(i),nw=[...l.add],pc=a=>a[r(a.length)];
+  if(l.mode==="sent")return pick(PASSH,2).join(" ");
+  const nc=nw.filter(c=>CONS.includes(c)),nm=nw.filter(c=>MAT.includes(c)),nv=nw.filter(c=>IVOW.includes(c)),ac=[...ch].filter(c=>CONS.includes(c)),am=[...ch].filter(c=>MAT.includes(c));
+  const cj=CONJ.filter(x=>[...x].every(c=>ch.includes(c)));
+  if(l.mode==="conj"){const t=[];for(let k=0;k<8;k++){const x=pc(cj);t.push(x,x)}return t.join(" ")+" "+pick(hpool(ch).filter(w=>w.includes("्")),10).join(" ")}
+  const syl=()=>{const c=nc.length&&r(10)<7?pc(nc):pc(ac),m=nm.length&&r(10)<7?pc(nm):(r(4)?pc(am):"");return c+m+(ch.includes("ं")&&!r(6)?"ं":"")};
+  const t=[];if(nc.length||nm.length){for(let k=0;k<(i===0?9:7);k++){const s=syl();t.push(s,s)}}
+  nv.forEach(v=>t.push(v,v));
+  if(ch.includes("१"))for(let k=0;k<3;k++)t.push([0,1,2].map(()=>pc([..."१२३४५६७८९०"])).join(""));
+  if(cj.length&&i<5)for(let k=0;k<3;k++)t.push(pc(cj));
+  const wp=hpool(ch);return t.concat(pick(wp,Math.min(wp.length,i===0?4:12))).join(" ")}
+const HST=HL.map((l,i)=>({id:l.id,name:l.n,hl:true,hi:true,ch:hcum(i)+" ",a:l.a,w:l.w,tip:l.tip,gen:()=>hgen(i)}));
+HST.forEach((s,i)=>{for(let k=0;k<20;k++){const t=s.gen();if(t!==t.normalize("NFC")||[...t].some(c=>!s.ch.includes(c)))console.warn("hindi lesson charset violation",i+1,[...t].find(c=>!s.ch.includes(c)))}
+  if(i>0&&i<5&&hpool(hcum(i)).length<12)console.warn("hindi lesson starved",i+1)});
+function ed(a,b){const n=a.length,m=b.length,D=Array.from({length:n+1},(_,i)=>{const r=new Uint16Array(m+1);r[0]=i;return r});for(let j=0;j<=m;j++)D[0][j]=j;
+  for(let i=1;i<=n;i++)for(let j=1;j<=m;j++)D[i][j]=Math.min(D[i-1][j]+1,D[i][j-1]+1,D[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  let i=n,j=m,s=0,de=0,ex=0;while(i>0||j>0){if(i>0&&j>0&&D[i][j]===D[i-1][j-1]+(a[i-1]===b[j-1]?0:1)){if(a[i-1]!==b[j-1])s++;i--;j--}else if(i>0&&D[i][j]===D[i-1][j]+1){de++;i--}else{ex++;j--}}
+  return{s,d:de,i:ex,n:s+de+ex}}
+function dictPlan(min,wpm){const need=min*wpm,out=[];let words=0,k=0;
+  while(words<need&&k++<40)for(const p of shuf(PASS))for(const s of p.match(/[^.?!]+[.?!]+/g)){if(words>=need)break;out.push(s.trim());words+=s.trim().split(" ").length}
+  return out.join(" ")}
+PASS.forEach(p=>{if(p!==p.normalize("NFC")||[...p].some(c=>!(L+U+P+"0123456789 ").includes(c)))console.warn("passage charset",p.slice(0,20))});
+/*DOM*/
+const $=q=>document.querySelector(q);
+/* ================= input capture: textarea value is truth; diff graphemes on every input ================= */
+const ASSIST=new Set(["insertFromPaste","insertFromDrop","insertReplacementText","insertFromYank","historyUndo","historyRedo"]);
+class Input{
+  constructor(el,cb){this.el=el;this.cb=cb;this.reset();
+    for(const[k,v]of Object.entries({autocomplete:"off",autocorrect:"off",autocapitalize:"off",spellcheck:"false","data-gramm":"false"}))el.setAttribute(k,v);
+    el.addEventListener("keydown",e=>{if(e.key==="Backspace"&&stage.exam&&stage.exam.strict){e.preventDefault();return}if(e.key==="Enter"){e.preventDefault();return}if(this.imeH&&this.imeH(e))return;if(e.repeat||/^(Arrow|Home$|End$|Page)/.test(e.key)){e.preventDefault();return}if(e.key==="Escape"&&this.onEsc)this.onEsc()});
+    el.addEventListener("beforeinput",e=>{if(stage.exam&&stage.exam.strict&&/^delete/.test(e.inputType)){e.preventDefault();return}this.pt=performance.now();this.ty=e.inputType});
+    el.addEventListener("compositionstart",()=>{this.comp=true});
+    el.addEventListener("compositionend",()=>{this.comp=false;this.handle(true)});
+    el.addEventListener("input",()=>this.handle(false));
+    for(const t of["select","click","mouseup","touchend"])el.addEventListener(t,()=>this.pin());
+    el.addEventListener("blur",()=>this.pause());el.addEventListener("focus",()=>this.resume());
+    document.addEventListener("visibilitychange",()=>document.hidden?this.pause():this.resume());
+  }
+  reset(){this.log=[];this.prev=[];this.comp=false;this.paused=false;this.gap=false;this.started=false;this.pt=0;this.ty="";this.el.value=""}
+  pin(){const n=this.el.value.length;this.el.setSelectionRange(n,n)}
+  inject(c){this.pt=performance.now();this.ty="insertText";this.el.value+=c;this.handle(false)}
+  pause(){if(this.paused||!this.started)return;this.paused=true;this.log.push({t:performance.now(),op:"pause"})}
+  resume(){if(!this.paused)return;this.paused=false;this.gap=true;this.log.push({t:performance.now(),op:"resume"})}
+  handle(fromEnd){
+    const t=this.pt||performance.now();this.pt=0;const nx=G(this.el.value),p=this.prev;
+    if(nx.length===p.length&&nx.every((x,i)=>x===p[i])){this.cb(nx);return}
+    let i=0;while(i<p.length&&i<nx.length&&p[i]===nx[i])i++;
+    let j=0;while(j<p.length-i&&j<nx.length-i&&p[p.length-1-j]===nx[nx.length-1-j])j++;
+    const rem=p.slice(i,p.length-j),add=nx.slice(i,nx.length-j);let f=0;if(this.gap){f|=8;this.gap=false}this.started=true;
+    const single=!rem.length&&add.length===1&&i===p.length;
+    if((this.comp||fromEnd||this.ty==="insertCompositionText")&&!single)f|=2;
+    if(!rem.length&&add.length){if(ASSIST.has(this.ty)||add.length>1||i!==p.length)f|=1;this.log.push({t,op:"ins",text:add.join(""),f})}
+    else if(!add.length){if(rem.length>1)f|=4;if(ASSIST.has(this.ty))f|=1;this.log.push({t,op:"del",n:rem.length,f})}
+    else{if(!(f&2))f|=1;this.log.push({t,op:"rep",removed:rem.join(""),text:add.join(""),f})}
+    this.prev=nx;this.pin();this.cb(nx);
+  }
+}
+/* ================= keyboard guide: finger colors (Okabe-Ito), next-key + shift highlighting ================= */
+const ROWS=["1234567890-=","qwertyuiop[]","asdfghjkl;'","zxcvbnm,./"],FING=[0,1,2,3,3,3,3,2,1,0,0,0],FC=["#CC79A7","#D55E00","#E69F00","#56B4E9"],FN=["pinky","ring finger","middle finger","index finger"];
+const SH={"!":"1","@":"2","#":"3","$":"4","%":"5","^":"6","&":"7","*":"8","(":"9",")":"0","_":"-","+":"=","{":"[","}":"]",":":";",'"':"'","<":",",">":".","?":"/"};
+const KEY={},lit=[];let shL,shR,sp;
+function mk(t,c,bg){const e=document.createElement("div");e.className="k "+(c||"");e.textContent=t;if(bg)e.style.background=bg;return e}
+(function(){const kb=$("#kb");ROWS.forEach((row,ri)=>{const d=document.createElement("div");d.className="kr";
+  if(ri===3){shL=mk("⇧","sh");d.appendChild(shL)}
+  [...row].forEach((c,ci)=>{const e=mk(c,c==="f"||c==="j"?"bump":"",FC[FING[ci]]);KEY[c]={el:e,f:FING[ci],h:ci<5?"left":"right"};d.appendChild(e)});
+  if(ri===3){shR=mk("⇧","sh");d.appendChild(shR)}kb.appendChild(d)});
+  const d=document.createElement("div");d.className="kr";sp=mk("space","sp");d.appendChild(sp);kb.appendChild(d);
+  $("#leg").innerHTML=FN.map((n,i)=>`<span><i style="background:${FC[i]}"></i>${n}</span>`).join("")+'<span>Thumbs: space</span>'})();
+function light(ch){lit.forEach(e=>e.classList.remove("nx"));lit.length=0;const h=$("#hint");
+  if(ch===undefined||!prefs.guide||(stage.exam&&!stage.exam.guide)){h.textContent="";return}
+  let b=ch,sh=false;if(stage.hi&&ch!==" "){const v=INV[ch];if(!v)return;b=v.b;sh=v.s}else if(/[A-Z]/.test(ch)){b=ch.toLowerCase();sh=true}else if(SH[ch]){b=SH[ch];sh=true}
+  const k=b===" "?{el:sp,h:"either",f:-1}:KEY[b];if(!k)return;lit.push(k.el);
+  if(sh)lit.push(k.h==="left"?shR:shL);lit.forEach(e=>e.classList.add("nx"));
+  h.textContent="Next: "+(ch===" "?"space · thumb":ch+" · "+k.h+" "+FN[k.f]+(sh?" + "+(k.h==="left"?"right":"left")+" Shift":""))}
+const ORD=["L pinky","L ring","L middle","L index","R index","R middle","R ring","R pinky"];
+function fingers(st,hi){const F={};
+  for(const c in st.k){let b=c;if(hi){const v=INV[c];if(!v)continue;b=v.b}else if(/[A-Z]/.test(c))b=c.toLowerCase();else if(SH[c])b=SH[c];const k=KEY[b];if(!k)continue;
+    const id=k.h[0].toUpperCase()+" "+FN[k.f].split(" ")[0],o=st.k[c],a=F[id]||(F[id]={id,f:k.f,n:0,e:0,rs:0,rc:0});a.n+=o.n;a.e+=o.e;a.rs+=o.rs;a.rc+=o.rc}
+  return Object.values(F).filter(a=>a.n>=10).map(a=>{const er=a.e/a.n,pace=a.rc?a.rs/a.rc:1;return{...a,er,pace,sc:.55*Math.min(1,er/.2)+.45*Math.min(1,Math.max(0,pace-1))}}).sort((x,y)=>ORD.indexOf(x.id)-ORD.indexOf(y.id))}
+/* ---- built-in Inscript input method: maps physical keys (layout-independent) to Devanagari ---- */
+function labelKeys(hi){const f=x=>/\p{M}/u.test(x)?"\u25cc"+x:x;for(const c in KEY){const e=KEY[c].el,u=hi&&INS[c]&&INS[c][0]?INS[c][0]:c,s=hi&&INS[c]&&INS[c][1]?INS[c][1]:"";e.textContent=hi?f(u):u;if(s){const t=document.createElement("small");t.textContent=f(s);e.appendChild(t)}}}
+function imeKey(e){if(e.ctrlKey||e.metaKey||e.altKey)return false;const k=CODE2[e.code];if(!k)return false;e.preventDefault();if(e.repeat)return true;
+  const ch=k===" "?" ":(INS[k]||["",""])[e.shiftKey?1:0];if(ch)ctl.inject(ch);return true}
+function renderH(){const s=$("#hstages");s.textContent="";
+  const mk=(x,t,open)=>{const b=document.createElement("button");b.textContent=t;b.disabled=!open;b.title=x.name;b.setAttribute("aria-label",x.name);b.setAttribute("aria-pressed",x===stage);b.onclick=()=>{stage=x;start()};s.appendChild(b)};
+  HST.forEach((x,i)=>mk(x,"H"+(i+1)+(prog.passed.includes(x.id)?"\u2713":""),i===0||prog.passed.includes(HST[i-1].id)));mk(HDR,"\u2605",prog.passed.includes("h3"))}
+const resumeH=()=>HST.find(x=>!prog.passed.includes(x.id))||HST[HST.length-1];
+const hdrLvl=()=>{let k=2;HL.forEach((l,i)=>{if(i<=4&&prog.passed.includes(l.id))k=Math.max(k,i)});return k};
+const HDR={id:"SH",name:"Hindi weak-spot drill",hi:true,hd:true,a:0,w:0,tip:"Words chosen from your slowest Devanagari keys and letter pairs, using only keys you have already learned.",gen:()=>smart(hpool(hcum(hdrLvl())),24,getSt("tt2:sth")).join(" ")};
+const isM=c=>/\p{M}/u.test(c),kn=c=>{const v=INV[c];return v?(v.s?"Shift+":"")+v.b.toUpperCase():""};
+const dk=(c,hi)=>hi?(isM(c)?"\u25cc":"")+c+" ("+kn(c)+")":c,dpr=(p,hi)=>hi?(isM(p[0])?"\u25cc":"")+p:p;
+/* ================= rendering: flat char-span array, only changed indices touched ================= */
+let tg=[],cs=[],cl=[],cmap=[],shown=[],cur=-1,curCp=0,stage=ST[1],done=false,tick,endDur=0;
+/* wall-clock active time: time up to the last key plus idle time since it (not while paused) */
+function activeMs(){const m=compute(ctl.log,tg),l=ctl.log[ctl.log.length-1];return m.dur+(l&&l.op!=="pause"&&l.op!=="resume"?performance.now()-l.t:0)}
+function fixDur(m){if(endDur&&m.dur){m.wpm=m.wpm*m.dur/endDur;m.dur=endDur}return m}
+const prog=store.get("tt2:prog",{passed:[]}),ta=$("#ta"),box=$("#text");if(!Array.isArray(prog.passed))prog.passed=[];
+function setCur(i){const ci=cmap[i];if(cs[cur])cs[cur].classList.remove("cur");cur=ci===undefined?-1:ci;curCp=i;const c=cs[cur];
+  if(c){c.classList.add("cur");if(c.offsetTop+c.offsetHeight>box.scrollTop+box.clientHeight-8||c.offsetTop<box.scrollTop)box.scrollTop=Math.max(0,c.offsetTop-box.clientHeight/3)}
+  light(tg[i])}
+function addText(text){const ext=cs.length>0;let w=null;for(const x of seg.segment(text)){const ch=x.segment,s=document.createElement("span"),st=tg.length;s.className="c";s.textContent=ch;cs.push(s);
+    for(const c of ch){cmap[tg.length]=cs.length-1;tg.push(c)}cl.push({s:st,e:tg.length});
+    if(ch===" "){box.appendChild(s);w=null}else{if(!w){w=document.createElement("span");w.className="w";box.appendChild(w)}w.appendChild(s)}}if(ext)$("#sr").textContent+=text}
+function build(text){tg=[];cs=[];cl=[];cmap=[];box.textContent="";box.scrollTop=0;addText(text);shown=[];cur=-1;setCur(0);$("#sr").textContent="Type: "+text}
+function paint(typed){let a=0;while(a<typed.length&&a<shown.length&&typed[a]===shown[a])a++;const hi=Math.max(typed.length,shown.length);
+  for(let i=0;i<cs.length;i++){const c=cl[i];if(c.e<=a||c.s>=hi)continue;let st="c";const n=Math.min(c.e,typed.length);
+    if(n>c.s){let bad=false;for(let k=c.s;k<n;k++)if(typed[k]!==tg[k]){bad=true;break}st+=bad?" bad":n>=c.e?" ok":" ptl"}cs[i].className=st}
+  shown=typed.slice();setCur(typed.length)}
+const ctl=new Input(ta,typed=>{if(stage.timed&&tg.length-typed.length<160)addText(" "+(stage.more?stage.more():sent(S5.concat(S8),4)));paint(typed);if(!done&&!stage.timed&&typed.length>=tg.length)finish()});ctl.onEsc=()=>start();
+const pct=x=>Math.round(x*100)+"%";
+const gateTxt=s=>s.exam?s.exam.txt:s.a?(s.timed?"3-minute timed run. ":"")+"To unlock the next stage: "+pct(s.a)+" accuracy"+(s.w?" · "+s.w+" WPM":"")+(s.c?" · "+pct(s.c)+" consistency":""):"Practice only — nothing to unlock.";
+function start(){done=false;endDur=0;clearInterval(tick);$("#kbw").hidden=!prefs.guide||(!!stage.exam&&!stage.exam.guide);ctl.imeH=(stage.imeOn||((stage.hl||stage.hd)&&$("#hime").checked))?imeKey:null;box.classList.toggle("hi",!!stage.hi);box.lang=stage.hi?"hi":"en";labelKeys(!!stage.hi);$("#res").hidden=true;ctl.reset();light();
+  const lesson=stage.id===0;$("#lesson").hidden=!lesson;$("#play").hidden=lesson;renderStages();renderH();if(lesson)return;
+  build(stage.gen());if(stage.timed)tick=setInterval(()=>{if(done||!ctl.log.length)return;const left=Math.max(0,stage.timed-activeMs());$("#gate").textContent=gateTxt(stage)+" · time left "+Math.floor(left/60000)+":"+z(Math.floor(left/1000)%60);if(left<=0){endDur=stage.timed;finish()}},250);$("#sname").textContent=(typeof stage.id==="number"?"Stage "+stage.id+" · ":"")+stage.name;$("#tip").textContent=stage.tip;$("#gate").textContent=gateTxt(stage);ta.focus()}
+function finish(){if(stage.exam)return examFinish();done=true;clearInterval(tick);if(stage.timed)ta.blur();const m=fixDur(compute(ctl.log,tg)),g=stage,okA=m.acc>=g.a,okW=m.wpm>=g.w,okC=!g.c||m.cons>=g.c,gated=typeof g.id==="number"||!!g.hl;
+  const pass=gated&&okA&&okW&&okC&&!m.asg,next=g.hl?HST[HST.indexOf(g)+1]:gated?ST[g.id+1]:null;
+  if(pass&&!prog.passed.includes(g.id)){prog.passed.push(g.id);store.set("tt2:prog",prog)}
+  logRun(m,"course");const sk=g.hi?"tt2:sth":"tt2:st",st=m.asg?getSt(sk):learn(m.S,sk),{K,B}=weakness(st),fg=fingers(st,g.hi),bad=fg.filter(a=>a.n>=20&&a.sc>.15).sort((x,y)=>y.sc-x.sc)[0];
+  const wk=Object.entries(K).filter(x=>x[1]>.03).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]),wb=Object.entries(B).filter(x=>x[1]>.15).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+  const c=(o,t)=>'<div class="chk '+(o?"ys":"no")+'">'+(o?"✓ ":"✗ ")+t+"</div>";
+  const coach=pass?"Clean run. Keep this rhythm and the speed will follow.":m.asg?"":!okA?"Accuracy first: slow down about 15% until the errors stop. Smooth beats rushed.":!okW?"Accurate. Now nudge the pace up a little while keeping your rhythm even.":!okC?"Your rhythm is uneven. Aim for a steady, metronome-like pace.":"";
+  $("#res").innerHTML='<h3>Consistency — how even your rhythm was</h3><div class="big">'+(m.cons?pct(m.cons):"—")+'</div>'+
+  '<div class="row"><div><b>'+pct(m.acc)+'</b>accuracy</div><div><b>'+Math.round(m.wpm)+'</b>net WPM</div><div><b>'+pct(m.rawAcc)+'</b>keystroke accuracy</div></div>'+
+  (gated?c(okA,"Accuracy ≥ "+pct(g.a))+(g.w?c(okW,"Speed ≥ "+g.w+" WPM"):"")+(g.c?c(okC,"Consistency ≥ "+pct(g.c)):""):"")+
+  (m.asg?'<div class="chk no">Paste, autocorrect or predictive text was detected, so this run can’t count. Turn off your keyboard’s suggestions.</div>':"")+
+  (coach?"<p>"+coach+"</p>":"")+((wk.length||wb.length)?"<p>Your weak spots: <b>"+wk.map(c=>dk(c,g.hi)).join(" ")+"</b> "+(wb.length?"· pairs <b>"+wb.map(c=>dpr(c,g.hi)).join(" ")+"</b>":"")+"</p>":"")+
+  (fg.length?'<h3>Your fingers, all-time: error rate · pace (1.0× = your average, higher is slower)</h3><div class="fg">'+fg.map(a=>'<div style="border-color:'+FC[a.f]+'">'+a.id+"<br>"+pct(a.er)+" · "+a.pace.toFixed(2)+"×</div>").join("")+"</div>"+(bad?"<p>Focus on your <b>"+bad.id+"</b> finger: slow down on its keys.</p>":""):"")+
+  '<div class="actions"><button class="pri" id="again">Try again</button>'+(pass&&next?'<button id="nx">Next stage →</button>':"")+"</div>"+
+  (pass&&!next?(g.hl?"<p>You’ve finished the Hindi course. Next, try timed Hindi tests in Exam practice.</p>":"<p>You’ve cleared every stage. Keep going with the weak-spot drill (★) to stay sharp.</p>"):"");
+  $("#res").hidden=false;$("#again").onclick=start;if($("#nx"))$("#nx").onclick=()=>{stage=next;start()};renderStages();renderH()}
+function renderStages(){const s=$("#stages");s.textContent="";
+  const add=(x,label,open)=>{const b=document.createElement("button");b.textContent=label;b.disabled=!open;b.title=x.name;b.setAttribute("aria-label",x.name);b.setAttribute("aria-pressed",x===stage);b.onclick=()=>{stage=x;start()};s.appendChild(b)};
+  for(const x of ST)add(x,x.id+(prog.passed.includes(x.id)?"✓":""),x.id===0||prog.passed.includes(x.id-1));
+  add(DRILL,"★",prog.passed.includes(3))}
+$("#ready").onclick=()=>{if(!prog.passed.includes(0)){prog.passed.push(0);store.set("tt2:prog",prog)}stage=ST[1];start()};
+/* ================= profile, exam practice, dictation ================= */
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let prof=store.get("tt2:profile",null);if(prof&&(typeof prof.name!=="string"||!PRESETS[prof.target]))prof=null;
+const onb=$("#onb"),pt=$("#pt"),exs=$("#exs");
+function fillSel(sel,skip){const gs={};for(const k in PRESETS){if(skip&&skip.includes(k))continue;const X=PRESETS[k];let g=gs[X.g];if(!g){g=gs[X.g]=document.createElement("optgroup");g.label=X.g;sel.appendChild(g)}const o=document.createElement("option");o.value=k;o.textContent=X.n;g.appendChild(o)}}
+fillSel(pt);fillSel(exs,["learn","bankclerk"]);
+const resumeStage=()=>prog.passed.includes(0)?ST[Math.min(10,Math.max(1,Math.max(0,...prog.passed.filter(n=>typeof n==="number"))+1))]:ST[0];
+function exnote(){const X=PRESETS[exs.value];$("#exnote").textContent=X.note;$("#exm").value=String(X.min||5);$("#exstrict").checked=!!X.strict;$("#exguide").checked=X.lang==="hi"}
+function pnote(){const X=PRESETS[pt.value];$("#pnote").textContent=X.note;$("#pw").value=X.w||25}
+function who(){$("#who").textContent=prof?"Hi, "+prof.name+" · Goal: "+PRESETS[prof.target].n+" · Target "+prof.w+" WPM":"";$("#pe").hidden=!prof;
+  const X=prof&&PRESETS[prof.target];$("#plan").textContent=!X?"":X.none?"Plan: your exam has no typing test, so treat the course as optional practice.":X.desc?"Plan: reach about 25 WPM in the course, then rehearse 30-minute typed writing in Exam practice.":X.lang==="hi"?"Plan: work through the Hindi course lessons with the keyboard guide on, then run Hindi passages in Exam practice.":X.sh?"Plan: build typing to "+prof.w+" WPM in the course, then use the Dictation tab for 10 minutes a day.":prof.target==="learn"?"Plan: work through the stages in order.":"Plan: reach Stage 7 with clean accuracy, then run timed Exam practice daily to build up to "+prof.w+" WPM."}
+function syncExam(){const k=prof&&exs.querySelector('option[value="'+prof.target+'"]')?prof.target:"chsl";exs.value=k;exnote()}
+function show(m){for(const b of $("#tabs").children)b.setAttribute("aria-pressed",b.dataset.m===m);dictStop();clearInterval(tick);
+  $("#stages").hidden=m!=="course";$("#hstages").hidden=m!=="hindi";$("#exam").hidden=m!=="exam";$("#dict").hidden=m!=="dict";$("#res").hidden=true;$("#wr").hidden=true;clearInterval(wrT);if(m==="dict")syncDict();
+  if(m==="course"){stage=resumeStage();start()}else if(m==="hindi"){stage=resumeH();start()}else{done=true;$("#lesson").hidden=true;$("#play").hidden=true;$("#kbw").hidden=true;light()}}
+for(const b of $("#tabs").children)b.onclick=()=>show(b.dataset.m);
+$("#pgo").onclick=()=>{const n=$("#pn").value.trim();if(!n){$("#pn").focus();return}if(!$("#pack").checked){$("#perr").hidden=false;$("#pack").focus();return}$("#perr").hidden=true;const X=PRESETS[pt.value];
+  prof={name:n.slice(0,40),ack:true,target:pt.value,w:Math.max(5,Math.min(150,+$("#pw").value||X.w||25))};store.set("tt2:profile",prof);onb.close();who();syncExam();renderToday();if(prof.target==="steno")show("dict");else if(PRESETS[prof.target].lang==="hi")show("hindi")};
+onb.addEventListener("cancel",e=>{if(!prof||!prof.ack)e.preventDefault()});pt.onchange=pnote;exs.onchange=exnote;
+$("#pe").onclick=()=>{$("#pn").value=prof.name;pt.value=prof.target;$("#pw").value=prof.w;$("#pnote").textContent=PRESETS[prof.target].note;$("#pack").checked=!!prof.ack;$("#perr").hidden=true;onb.showModal()};
+function initProfile(){who();syncExam();renderToday();if(!prof||!prof.ack){if(prof){$("#pn").value=prof.name;pt.value=prof.target;$("#pw").value=prof.w;$("#pnote").textContent=PRESETS[prof.target].note}else pnote();onb.showModal();$("#pn").focus()}}
+const nextP=()=>pick(PASS,1)[0],nextH=()=>pick(PASSH,1)[0];
+function startExam(){const X=PRESETS[exs.value],min=+$("#exm").value,tw=prof&&prof.w||X.w||0,strict=$("#exstrict").checked,hi=X.lang==="hi";
+  if(X.desc)return startDesc(X,min);
+  stage={id:"E",name:X.n+" \u00b7 "+min+"-minute test",hi,imeOn:hi&&$("#hime").checked,ch:L+U+P+"0123456789",tip:"Type the passage exactly as shown. Capitals and punctuation count. Esc restarts."+(strict?" Backspace is off, as in the real test.":""),timed:min*6e4,
+    exam:{X,strict,guide:$("#exguide").checked,txt:min+"-minute timed test. Target "+tw+" WPM, at most "+pct(X.err||.1)+" errors."+(X.kd?" At least "+X.kd+" key depressions per hour.":"")+(strict?" Backspace is off.":"")},gen:hi?()=>nextH()+" "+nextH():()=>nextP()+" "+nextP(),more:hi?nextH:nextP};
+  $("#exam").hidden=true;start()}
+function syncDict(){const X=prof&&PRESETS[prof.target];$("#dnote").textContent=X&&X.sh?X.n+": shorthand "+X.sh.join(" or ")+" WPM. "+X.note:"Pick a speed. Steno posts covered here: SSC Stenographer, JKSSB and J&K High Court stenographers.";if(X&&X.sh)$("#ds").value=String(X.sh[0])}
+const TOPICS=["Digital payments and financial inclusion in rural India","Why reading habits matter in the age of short videos","Should every graduate learn a practical skill before a job?","How banks can build public trust","Cities, traffic, and the case for public transport","Artificial intelligence and the future of clerical work"];
+let wrT=0,wrStart=0,wrMs=0;
+const wcount=()=>($("#wrta").value.trim().match(/\S+/g)||[]).length;
+function startDesc(X,min){const t=TOPICS[r(TOPICS.length)],ps=PASS[r(PASS.length)];
+  $("#exam").hidden=true;$("#wr").hidden=false;$("#res").hidden=true;
+  $("#wrp").innerHTML="<b>Essay (about 250 words):</b> "+esc(t)+"<br><b>Comprehension (about 80 words):</b> summarise this passage in your own words.<br><i>"+esc(ps)+"</i>";
+  const w=$("#wrta");w.value="";w.disabled=false;wrStart=0;wrMs=min*6e4;clearInterval(wrT);$("#wrs").textContent="The timer starts when you type. "+min+" minutes.";w.focus();
+  wrT=setInterval(()=>{if(!wrStart)return;const left=Math.max(0,wrMs-(performance.now()-wrStart));$("#wrs").textContent=wcount()+" words \u00b7 "+Math.floor(left/6e4)+":"+z(Math.floor(left/1000)%60)+" left";if(!left)descDone()},500)}
+$("#wrta").addEventListener("input",()=>{if(!wrStart)wrStart=performance.now()});
+function descDone(){clearInterval(wrT);const w=$("#wrta");w.disabled=true;const el=wrStart?Math.min(wrMs,performance.now()-wrStart):1,n=wcount(),mins=el/6e4;if(n>=5)logRun({asg:false,dur:el,wpm:0,acc:0,cons:0},"write");
+  $("#wr").hidden=true;$("#res").innerHTML="<h3>"+(prof?esc(prof.name)+", your":"Your")+" descriptive-writing run</h3><div class=\"big\">"+n+"<small> words</small></div><div class=\"row\"><div><b>"+Math.round(w.value.length/5/Math.max(mins,.01))+"</b>typing WPM while composing</div><div><b>"+Math.round(mins)+"</b>minutes</div></div><p>"+(n>=330?"That is enough text for an essay and a short summary. Next, reread for grammar and structure.":"Aim for about 330 words in 30 minutes: roughly 250 for the essay and 80 for the summary. Plan for 2 minutes, then write without stopping.")+"</p><p class=\"gate\">This measures typing volume, not content quality. Real marks depend on how well you write.</p><div class=\"actions\"><button class=\"pri\" id=\"again\">Another topic</button><button id=\"back\">Exam setup</button></div>";
+  $("#res").hidden=false;$("#again").onclick=startExam;$("#back").onclick=()=>show("exam")}
+$("#wrend").onclick=descDone;
+$("#exgo").onclick=startExam;
+function examFinish(){done=true;clearInterval(tick);ta.blur();
+  const X=stage.exam.X,m=fixDur(compute(ctl.log,tg)),mins=Math.max(m.dur/6e4,1e-9),
+  ks=ctl.log.reduce((n,q)=>q.op==="del"?n+1:q.op==="ins"||q.op==="rep"?n+G(q.text).length:n,0),
+  gross=m.S.length/5/mins,net=m.wpm,kd=ks/mins*60,err=1-m.acc,tw=prof&&prof.w||X.w||0,lim=X.err||.1,
+  okW=net>=tw,okE=err<=lim,okK=!X.kd||kd>=X.kd,pass=okW&&okE&&okK&&!m.asg;
+  const sk=stage.hi?"tt2:sth":"tt2:st",st=m.asg?getSt(sk):learn(m.S,sk);logRun(m,"exam");const{K,B}=weakness(st),wk=Object.entries(K).filter(x=>x[1]>.03).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]),wb=Object.entries(B).filter(x=>x[1]>.15).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+  const c=(o,t)=>'<div class="chk '+(o?"ys":"no")+'">'+(o?"✓ ":"✗ ")+t+"</div>",nm=prof?esc(prof.name):"";
+  $("#res").innerHTML='<h3>'+nm+(pass?", you cleared this practice test":", here is your test result")+'</h3><div class="big">'+Math.round(net)+'<small> net WPM</small></div>'+
+  '<div class="row"><div><b>'+Math.round(gross)+'</b>gross WPM</div><div><b>'+pct(err)+'</b>errors</div><div><b>'+Math.round(kd)+'</b>key depressions / hour</div><div><b>'+(m.cons?pct(m.cons):"—")+'</b>consistency</div></div>'+
+  c(okW,"Net speed ≥ "+tw+" WPM")+c(okE,"Errors ≤ "+pct(lim))+(X.kd?c(okK,"Key depressions ≥ "+X.kd+" per hour"):"")+
+  (m.asg?'<div class="chk no">Paste or autocorrect was detected, so this run can’t count.</div>':"")+
+  "<p>"+(pass?"Keep the same rhythm and raise your target a little next time.":!okE?"Errors cost more than speed in a real test. Slow down until you are under "+pct(lim)+".":!okW?"Accurate enough. Now build pace with the weak-spot drill (★) and Stages 8 and 9.":"Almost there. Hold a steadier rhythm.")+"</p>"+
+  ((wk.length||wb.length)?"<p>Your weak spots: <b>"+wk.map(c=>dk(c,stage.hi)).join(" ")+"</b> "+(wb.length?"· pairs <b>"+wb.map(c=>dpr(c,stage.hi)).join(" ")+"</b>":"")+"</p>":"")+
+  '<p class="gate">Practice limits are guides. Confirm the exact rules in your official notification.</p><div class="actions"><button class="pri" id="again">Another passage</button><button id="back">Exam setup</button></div>';
+  $("#res").hidden=false;$("#again").onclick=startExam;$("#back").onclick=()=>show("exam")}
+const DS={ph:[],i:0,run:false,t:0,wpm:80};
+function dictStop(end){DS.run=false;clearTimeout(DS.t);try{speechSynthesis.cancel()}catch(e){}$("#dshow").textContent="";$("#dstat").textContent=end?"Dictation finished. Type what you heard, then check it.":DS.ph.length?"Stopped.":""}
+function dictNext(){if(!DS.run)return;if(DS.i>=DS.ph.length)return dictStop(true);
+  const p=DS.ph[DS.i++],w=p.trim().split(/\s+/).length,slot=w/DS.wpm*6e4;$("#dstat").textContent="Dictating at "+DS.wpm+" WPM · "+DS.i+"/"+DS.ph.length;
+  if("speechSynthesis"in window){const u=new SpeechSynthesisUtterance(p);u.lang="en-IN";speechSynthesis.speak(u)}else $("#dshow").textContent=p;
+  DS.t=setTimeout(dictNext,slot)}
+$("#dgo").onclick=()=>{dictStop();DS.wpm=+$("#ds").value;DS.ph=dictPlan(+$("#dm").value,DS.wpm).match(/[^,;:.?!]+[,;:.?!]*\s*/g)||[];DS.i=0;DS.run=true;$("#dt").value="";$("#dres").textContent="";$("#dt").focus();dictNext()};
+$("#dstop").onclick=()=>dictStop();
+$("#dchk").onclick=()=>{const m=DS.ph.slice(0,DS.i).join("").trim().split(/\s+/).filter(Boolean),t=$("#dt").value.trim().split(/\s+/).filter(Boolean);
+  if(!m.length){$("#dres").textContent="Start a dictation first.";return}const e=ed(m,t);logRun({asg:false,dur:m.length/DS.wpm*6e4,wpm:0,acc:1-Math.min(1,e.n/m.length),cons:0},"dict");
+  $("#dres").innerHTML="<p><b>"+pct(Math.min(1,e.n/m.length))+"</b> errors: "+e.n+" in "+m.length+" words ("+e.s+" wrong, "+e.d+" missed, "+e.i+" extra). Capitals and punctuation count here, which is stricter than most official marking.</p><details><summary>Show the dictated text</summary><p>"+esc(m.join(" "))+"</p></details>"};
+(function(){const c=$("#pad"),x=c.getContext("2d");let d=false;const pos=e=>{const b=c.getBoundingClientRect();return[(e.clientX-b.left)*c.width/b.width,(e.clientY-b.top)*c.height/b.height]};
+  c.onpointerdown=e=>{d=true;x.beginPath();x.moveTo(...pos(e));c.setPointerCapture(e.pointerId)};
+  c.onpointermove=e=>{if(!d)return;x.lineWidth=2.2;x.lineCap="round";x.strokeStyle=getComputedStyle(document.body).color;x.lineTo(...pos(e));x.stroke()};
+  c.onpointerup=()=>{d=false};$("#padc").onclick=()=>x.clearRect(0,0,c.width,c.height)})();
+/* ================= progress log, streak, backup ================= */
+const day=d=>d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate());
+const getLog=()=>{const a=store.get("tt2:log",[]);return Array.isArray(a)?a:[]};
+function logRun(m,k){if(m.asg||!m.dur)return;const lg=getLog();lg.push({d:day(new Date()),k,s:String(stage.id),w:Math.round(m.wpm||0),a:+(m.acc||0).toFixed(3),c:+(m.cons||0).toFixed(3),m:+(m.dur/6e4).toFixed(2)});store.set("tt2:log",lg.slice(-300));renderProg();renderToday()}
+function streak(days){let n=0,d=new Date();if(!days.has(day(d)))d.setDate(d.getDate()-1);while(days.has(day(d))){n++;d.setDate(d.getDate()-1)}return n}
+function renderProg(){const lg=getLog(),days=new Set(lg.map(x=>x.d)),td=day(new Date()),tl=lg.filter(x=>x.d===td),sum=a=>a.reduce((s,x)=>s+(+x.m||0),0),bars=[];
+  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=day(d);bars.push([k,sum(lg.filter(x=>x.d===k))])}
+  const mx=Math.max(5,...bars.map(b=>b[1])),best=Math.max(0,...lg.map(x=>+x.w||0)),bc=Math.max(0,...lg.map(x=>+x.c||0));
+  $("#prog").innerHTML='<div class="row"><div><b>'+streak(days)+'</b>day streak</div><div><b>'+Math.round(sum(tl))+'</b>min today</div><div><b>'+tl.length+'</b>runs today</div><div><b>'+Math.round(best)+'</b>best net WPM</div><div><b>'+pct(bc)+'</b>best consistency</div></div><div class="bars">'+bars.map(b=>'<div title="'+b[0]+': '+b[1].toFixed(1)+' min"><i style="height:'+Math.round(b[1]/mx*60)+'px"></i><span>'+b[0].slice(8)+'</span></div>').join("")+'</div><p class="hint">Minutes practised over the last 7 days (day of month shown). Aim for something every day.</p>'}
+/* ================= today's plan: built from the goal, the learner's progress and what the log says is already done today ================= */
+function todayDone(f){const td=day(new Date());return getLog().some(x=>x.d===td&&f(x))}
+function planToday(){if(!prof||!PRESETS[prof.target])return[];const X=PRESETS[prof.target],hi=X.lang==="hi",wkend=[0,6].includes(new Date().getDay()),steps=[];
+  const courseDone=hi?prog.passed.includes("h7"):prog.passed.includes(10),drillOk=hi?prog.passed.includes("h3"):prog.passed.includes(3),isDr=x=>x.s==="S"||x.s==="SH",isH=x=>/^h/.test(x.s||"");
+  if(!courseDone)steps.push({t:"Lesson",sub:(()=>{const s=hi?resumeH():resumeStage();return s.id===0?"Set up your posture, then Stage 1 · Home row":s.name})(),min:10,done:todayDone(x=>x.k==="course"&&!isDr(x)&&(hi?isH(x):!isH(x))),go:()=>show(hi?"hindi":"course")});
+  if(drillOk)steps.push({t:"Weak-spot drill",sub:hi?"Your slowest Devanagari keys and pairs":"Your slowest keys and pairs",min:5,done:todayDone(x=>x.k==="course"&&(hi?x.s==="SH":x.s==="S")),go:()=>{show(hi?"hindi":"course");stage=hi?HDR:DRILL;start()}});
+  if(X.sh)steps.push({t:"Dictation",sub:X.sh[0]+" WPM for 5 minutes, then check your transcript",min:5,done:todayDone(x=>x.k==="dict"),go:()=>{show("dict");$("#dm").value="5";$("#ds").value=String(X.sh[0]);$("#dgo").click()}});
+  if(X.desc){const m=wkend?30:15;steps.push({t:"Typed writing",sub:m+" minutes: essay and summary"+(wkend?" (full length today)":""),min:m,done:todayDone(x=>x.k==="write"),go:()=>{exs.value=prof.target;exnote();$("#exm").value=String(m);show("exam");startExam()}})}
+  else if(!X.none&&prof.target!=="learn"){const m=wkend?(X.min||10):5;steps.push({t:"Timed test",sub:m+" minutes, "+X.n+(wkend?" (full length today)":""),min:m,done:todayDone(x=>x.k==="exam"),go:()=>{exs.value=prof.target;exnote();$("#exm").value=String(m);show("exam");startExam()}})}
+  return steps}
+function renderToday(){const el=$("#tp"),st=planToday();el.textContent="";$("#today").hidden=!st.length;if(!st.length)return;
+  $("#tsum").textContent="Today\u2019s plan \u00b7 "+st.filter(s=>s.done).length+" of "+st.length+" done";
+  for(const s of st){const row=document.createElement("div"),d=document.createElement("div"),t=document.createElement("b"),u=document.createElement("span"),b=document.createElement("button");row.className="trow";
+    t.textContent=s.t+" \u00b7 about "+s.min+" min";u.className="gate";u.textContent=s.sub;d.append(t,u);b.textContent=s.done?"\u2713 Done, again":"Start";if(!s.done)b.className="pri";b.onclick=s.go;row.append(d,b);el.appendChild(row)}}
+const WKEYS=["tt2:prog","tt2:st","tt2:sth","tt2:prefs","tt2:profile","tt2:log"];
+$("#flegal").onclick=$("#olegal").onclick=()=>$("#legal").showModal();$("#lclose").onclick=()=>$("#legal").close();
+let wipeT=0;$("#wipe").onclick=()=>{const m=$("#wipemsg"),w=$("#wipe");if(!wipeT){m.textContent="Click again within 5 seconds to confirm. This cannot be undone.";w.textContent="Yes, delete everything";
+  wipeT=setTimeout(()=>{wipeT=0;m.textContent="";w.textContent="Delete all my data on this device"},5000);return}
+  clearTimeout(wipeT);try{for(const k of WKEYS)localStorage.removeItem(k)}catch(e){}location.reload()};
+const BKEYS=["tt2:prog","tt2:st","tt2:sth","tt2:prefs","tt2:profile","tt2:log"];
+$("#exp").onclick=()=>{const d={};for(const k of BKEYS){try{const v=localStorage.getItem(k);if(v)d[k]=v}catch(e){}}const s=JSON.stringify({v:1,saved:new Date().toISOString(),data:d});$("#bk").value=s;$("#bk").select();try{navigator.clipboard.writeText(s).catch(()=>{})}catch(e){}$("#pmsg").textContent="Backup is in the box. Copy it and keep it somewhere safe, such as a notes app or an email to yourself."};
+$("#imp").onclick=()=>{try{const o=JSON.parse($("#bk").value);if(!o||o.v!==1||typeof o.data!=="object"||!o.data)throw 0;
+  const ok=Object.keys(o.data).every(k=>BKEYS.includes(k)&&typeof o.data[k]==="string"&&o.data[k].length<4e5&&typeof JSON.parse(o.data[k])==="object");if(!ok)throw 0;
+  for(const k in o.data)localStorage.setItem(k,o.data[k]);location.reload()}catch(e){$("#pmsg").textContent="That does not look like a Touch backup. Paste the full text and try again."}};
+/* ================= display prefs ================= */
+const prefs=Object.assign({font:"atk",ls:0,pal:"bo",guide:true,hime:true},store.get("tt2:prefs",{})),R=document.documentElement;
+const FONTS={atk:'"Atkinson Hyperlegible",system-ui,sans-serif',sys:"system-ui,sans-serif",mono:"ui-monospace,Menlo,Consolas,monospace"};
+let prefsOn=false;
+function applyPrefs(){R.style.setProperty("--font",FONTS[prefs.font]);R.style.setProperty("--ls",prefs.ls+"em");R.dataset.pal=prefs.pal;$("#kbw").hidden=!prefs.guide;if(prefsOn)store.set("tt2:prefs",prefs);light(tg[curCp])}
+$("#font").value=prefs.font;$("#ls").value=prefs.ls;$("#pal").value=prefs.pal;$("#guide").checked=prefs.guide;$("#hime").checked=prefs.hime;
+$("#font").onchange=e=>{prefs.font=e.target.value;applyPrefs()};$("#ls").oninput=e=>{prefs.ls=+e.target.value;applyPrefs()};
+$("#pal").onchange=e=>{prefs.pal=e.target.value;applyPrefs()};$("#guide").onchange=e=>{prefs.guide=e.target.checked;applyPrefs()};$("#hime").onchange=e=>{prefs.hime=e.target.checked;applyPrefs()};
+box.onclick=()=>ta.focus();
+stage=prog.passed.includes(0)?ST[Math.min(10,Math.max(1,(Math.max(0,...prog.passed.filter(n=>typeof n==="number"))+1)))]:ST[0];
+applyPrefs();prefsOn=true;start();initProfile();renderProg();renderToday();
+if("serviceWorker"in navigator&&/^https?:/.test(location.protocol))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
