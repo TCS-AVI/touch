@@ -1,6 +1,6 @@
 /* Touch service worker. Network first, so a new index.html is picked up as soon as you are online;
    falls back to the saved copy when offline. Bump V if you change the file list. */
-const V="touch-v10";
+const V="touch-v11";
 const ASSETS=["./","./index.html","./manifest.webmanifest","./favicon.png","./logo.png","./icon-192.png","./icon-512.png","./thoughts.js","./feedback.js"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});

@@ -72,7 +72,7 @@ li{margin:4px 0}
 <body>
 <main>
 <div class="brand"><img src="logo.png" width="56" height="56" alt="The Computer Services logo"><h1>Touch <span class="betatag">Beta</span></h1><a href="/">The Computer Services</a></div>
-<p class="sub">Typing software from <b>The Computer Services</b>. From your first key to expert speed. Accuracy first, then rhythm, then pace.</p>
+<p class="sub">Free beta typing practice &middot; Jakh, Samba, J&amp;K</p>
 <div class="quick"><button id="qth" type="button" aria-label="Change theme">Theme: Auto</button><button id="qsn" type="button" aria-label="Change typing sound">Sound: Off</button><span class="gate" id="qstk" style="align-self:center"></span></div>
 <p class="gate" id="thought" hidden></p>
 <p class="gate"><span id="who"></span> <button id="pe" hidden>Edit</button></p><p class="gate" id="plan"></p>
@@ -587,7 +587,7 @@ if("serviceWorker"in navigator&&/^https?:/.test(location.protocol))addEventListe
 </style>
 <script>
 (function(){
-var VER="2026.11.07",KEY="tt2:ver",later="";
+var VER="2026.11.08",KEY="tt2:ver",later="";
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}return null}
 function cmp(a,b){a=String(a).split(".");b=String(b).split(".");for(var i=0;i<Math.max(a.length,b.length);i++){var x=+a[i]||0,y=+b[i]||0;if(x!==y)return x>y?1:-1}return 0}
 function info(){return fetch("version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
