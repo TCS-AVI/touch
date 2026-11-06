@@ -1,8 +1,9 @@
 {
- "version": "2026.11.05",
- "date": "2026-11-05",
+ "version": "2026.11.07",
+ "date": "2026-11-07",
  "notes": [
-  "Open / closed badge for The Computer Services",
-  "Install app instructions for iPhone, Android, Windows and Mac"
+  "Share my result: after a run, make a picture card with your speed, accuracy and streak to post on WhatsApp Status",
+  "Progress now shows your best speed per day for the last 14 days",
+  "Install button is now easy to spot, plus Add to Home Screen steps for all devices"
  ]
 }
